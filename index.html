@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eid Milan Party Registration</title>
-    <link rel="icon" type="image/png" href="FVIcon.png">
+
+    <link rel="icon" type="image/png" href="FVIcon.png?v=4">
     
     <style>
         body {
@@ -18,17 +19,22 @@
             padding: 20px;
         }
 
-        .lang-switcher { margin-bottom: 20px; }
+        .lang-switcher {
+            margin-bottom: 20px;
+        }
+
         .lang-btn {
             background: #fff;
             border: 2px solid #0a3d7a;
             color: #0a3d7a;
-            padding: 5px 25px;
+            padding: 5px 15px;
             cursor: pointer;
             border-radius: 20px;
             font-weight: bold;
             margin: 0 5px;
+            transition: 0.3s;
         }
+
         .lang-btn.active {
             background: #0a3d7a;
             color: white;
@@ -36,70 +42,79 @@
 
         .registration-card {
             background: #ffffff;
-            max-width: 550px;
+            max-width: 500px;
             width: 100%;
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            overflow: hidden;
-        }
-
-        /* FIX: Using the exact Case-Sensitive filename from your GitHub */
-        .header-image {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .intro-section {
-            padding: 20px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-top: 10px solid #0a3d7a;
             text-align: center;
         }
 
-        .intro-msg {
-            color: #666;
-            font-size: 15px;
-            line-height: 1.6;
-            margin: 0;
+        .logo {
+            width: 140px;
+            height: auto;
+            margin-bottom: 10px;
         }
 
-        .form-section { padding: 0 40px 40px 40px; }
+        h2 { color: #0a3d7a; margin: 10px 0 5px 0; }
         
-        label { 
-            display: block; 
-            margin-top: 20px; 
-            font-weight: 500; 
-            color: #333; 
-            font-size: 15px;
+        .address-header {
+            color: #b8860b;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
         }
-        
+
+        .intro-text {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        form { text-align: left; border-top: 1px solid #eee; padding-top: 10px; }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
         input, textarea {
             width: 100%;
             padding: 12px;
-            margin-top: 8px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
             box-sizing: border-box;
             font-size: 16px;
-            background-color: #fafafa;
         }
 
-        .guest-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 20px; 
+        .guest-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
         .register-btn {
             background-color: #0a3d7a;
             color: white;
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 30px;
+            margin-top: 25px;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            background-color: #0d4e9c;
         }
     </style>
 </head>
@@ -111,62 +126,82 @@
     </div>
 
     <div class="registration-card">
-        <img src="Header_BG.jpg" alt="Eid Milan Party" class="header-image">
+        <img src="FVIcon.png" alt="Logo" class="logo">
+        
+        <h2 id="title">Eid Milan Party</h2>
+        <div class="address-header" id="header-address">📍 Max-Planck-Straße 19, 42277 Wuppertal</div>
+        
+        <p class="intro-text" id="intro-msg">
+            Join us for a joyful Eid Milan gathering as we celebrate the blessings of Eid ul Adha. Let’s come together to share the happiness of this special occasion with food, friendship, and community spirit.
+        </p>
 
-        <div class="intro-section">
-            <p class="intro-msg" id="intro-message">
-                Join us for a joyful Eid Milan gathering as we celebrate the blessings of Eid ul Adha. Let’s come together to share the happiness of this special occasion with food, friendship, and community spirit.
-            </p>
-        </div>
+        <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
+            <label for="name" id="label-name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Lead Guest Name" required>
 
-        <div class="form-section">
-            <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
-                <label for="name" id="label-name">Full Name</label>
-                <input type="text" id="name" name="name" required>
+            <label for="phone" id="label-phone">Phone Number (WhatsApp)</label>
+            <input type="tel" id="phone" name="phone" placeholder="e.g. 0176 30375907" required>
 
-                <label for="phone" id="label-phone">Phone Number (WhatsApp)</label>
-                <input type="tel" id="phone" name="phone" required>
+            <label for="city" id="label-city">City</label>
+            <input type="text" id="city" name="city" placeholder="From which city?" required>
 
-                <label for="city" id="label-city">City</label>
-                <input type="text" id="city" name="city" required>
-
-                <div class="guest-grid">
-                    <div>
-                        <label for="adults" id="label-adults">Adults</label>
-                        <input type="number" id="adults" name="adults" value="1" min="1">
-                    </div>
-                    <div>
-                        <label for="kids" id="label-kids">Kids</label>
-                        <input type="number" id="kids" name="kids" value="0" min="0">
-                    </div>
+            <div class="guest-grid">
+                <div>
+                    <label for="adults" id="label-adults">Adults</label>
+                    <input type="number" id="adults" name="adults" value="1" min="1">
                 </div>
+                <div>
+                    <label for="kids" id="label-kids">Kids</label>
+                    <input type="number" id="kids" name="kids" value="0" min="0">
+                </div>
+            </div>
 
-                <label for="notes" id="label-notes">Special Requests (Optional)</label>
-                <textarea id="notes" name="notes" rows="3"></textarea>
+            <label for="notes" id="label-notes">Special Requests</label>
+            <textarea id="notes" name="notes" rows="2" placeholder="Dietary needs..."></textarea>
 
-                <button type="submit" class="register-btn" id="submit-btn">Submit Registration</button>
-            </form>
-        </div>
+            <button type="submit" class="register-btn" id="submit-btn">Submit Registration</button>
+        </form>
     </div>
 
     <script>
         const translations = {
             en: {
+                title: "Eid Milan Party",
                 intro: "Join us for a joyful Eid Milan gathering as we celebrate the blessings of Eid ul Adha. Let’s come together to share the happiness of this special occasion with food, friendship, and community spirit.",
-                labelName: "Full Name", labelPhone: "Phone Number (WhatsApp)", labelCity: "City",
-                labelAdults: "Adults", labelKids: "Kids", labelNotes: "Special Requests (Optional)",
-                submitBtn: "Submit Registration"
+                labelName: "Full Name",
+                labelPhone: "Phone Number (WhatsApp)",
+                labelCity: "City",
+                labelAdults: "Adults",
+                labelKids: "Kids",
+                labelNotes: "Special Requests",
+                submitBtn: "Submit Registration",
+                placeholders: {
+                    name: "Lead Guest Name",
+                    city: "From which city?",
+                    notes: "Dietary needs..."
+                }
             },
             de: {
+                title: "Eid Milan Party",
                 intro: "Feiern Sie mit uns ein freudiges Eid Milan Treffen zum gesegneten Eid ul Adha Fest. Lassen Sie uns zusammenkommen, um das Glück dieses besonderen Anlasses bei gutem Essen und in herzlicher Gemeinschaft zu teilen.",
-                labelName: "Vollständiger Name", labelPhone: "Telefonnummer (WhatsApp)", labelCity: "Stadt",
-                labelAdults: "Erwachsene", labelKids: "Kinder", labelNotes: "Besondere Wünsche (Optional)",
-                submitBtn: "Registrierung Absenden"
+                labelName: "Vollständiger Name",
+                labelPhone: "Telefonnummer (WhatsApp)",
+                labelCity: "Stadt",
+                labelAdults: "Erwachsene",
+                labelKids: "Kinder",
+                labelNotes: "Besondere Wünsche",
+                submitBtn: "Registrierung Absenden",
+                placeholders: {
+                    name: "Name des Hauptgastes",
+                    city: "Aus welcher Stadt kommen Sie?",
+                    notes: "Ernährungswünsche..."
+                }
             }
         };
 
         function setLanguage(lang) {
-            document.getElementById('intro-message').innerText = translations[lang].intro;
+            document.getElementById('title').innerText = translations[lang].title;
+            document.getElementById('intro-msg').innerText = translations[lang].intro;
             document.getElementById('label-name').innerText = translations[lang].labelName;
             document.getElementById('label-phone').innerText = translations[lang].labelPhone;
             document.getElementById('label-city').innerText = translations[lang].labelCity;
@@ -174,6 +209,11 @@
             document.getElementById('label-kids').innerText = translations[lang].labelKids;
             document.getElementById('label-notes').innerText = translations[lang].labelNotes;
             document.getElementById('submit-btn').innerText = translations[lang].submitBtn;
+
+            document.getElementById('name').placeholder = translations[lang].placeholders.name;
+            document.getElementById('city').placeholder = translations[lang].placeholders.city;
+            document.getElementById('notes').placeholder = translations[lang].placeholders.notes;
+
             document.getElementById('en-btn').classList.toggle('active', lang === 'en');
             document.getElementById('de-btn').classList.toggle('active', lang === 'de');
         }
