@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eid Milan Party Registration</title>
 
-    <link rel="icon" type="image/png" href="FVIcon.png">
+    <link rel="icon" type="image/png" href="FVIcon.png?v=1">
     
     <style>
         /* CSS STYLING */
@@ -27,14 +27,15 @@
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            border-top: 10px solid #0a3d7a; /* Blue from flyer */
+            border-top: 10px solid #0a3d7a;
             text-align: center;
         }
 
         .logo {
-            width: 120px;
+            width: 140px; /* Adjusted size */
             height: auto;
             margin-bottom: 15px;
+            border-radius: 10px;
         }
 
         h2 { color: #0a3d7a; margin: 10px 0; }
@@ -87,20 +88,20 @@
 <body>
 
 <div class="registration-card">
-    <img src="Logo_WU_Wooven_3.jpg" alt="Logo" class="logo">
+    <img src="FVIcon.png" alt="Logo" class="logo">
     
     <h2>Eid Milan Party</h2>
-    <div class="event-detail">30.05.2026 | Wuppertal</div>
+    <div class="event-detail">Saturday, 30.05.2026 | Wuppertal</div>
 
     <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Lead Guest Name" required>
+        <label for="name">Lead Guest Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter full name" required>
 
         <label for="phone">Phone Number (WhatsApp)</label>
         <input type="tel" id="phone" name="phone" placeholder="e.g. 0176 30375907" required>
 
-        <label for="city">City</label>
-        <input type="text" id="city" name="city" placeholder="From which city?" required>
+        <label for="city">From which city are you coming?</label>
+        <input type="text" id="city" name="city" placeholder="e.g. Karachi, Wuppertal" required>
 
         <div class="guest-grid">
             <div>
@@ -113,8 +114,8 @@
             </div>
         </div>
 
-        <label for="notes">Special Requests</label>
-        <textarea id="notes" name="notes" rows="2" placeholder="Dietary needs or questions"></textarea>
+        <label for="notes">Special Requests (Optional)</label>
+        <textarea id="notes" name="notes" rows="2" placeholder="Dietary needs or extra info..."></textarea>
 
         <button type="submit" class="register-btn">Submit Registration</button>
     </form>
