@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Milan Party Registration</title>
+    <style>
+        /* CSS STYLING */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .registration-card {
+            background: #ffffff;
+            max-width: 450px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-top: 10px solid #0a3d7a; /* Blue from flyer */
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        h2 { color: #0a3d7a; margin: 10px 0; }
+        .event-detail { color: #b8860b; font-weight: bold; margin-bottom: 25px; }
+
+        form { text-align: left; }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .guest-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .register-btn {
+            background-color: #0a3d7a;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.3s;
+        }
+
+        .register-btn:hover {
+            background-color: #0d4e9c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="registration-card">
+    <img src="Logo_WU_Wooven_3.jpg" alt="Logo" class="logo">
+    
+    <h2>Eid Milan Party</h2>
+    <div class="event-detail">30.05.2026 | Wuppertal</div>
+
+    <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Lead Guest Name" required>
+
+        <label for="phone">Phone Number (WhatsApp)</label>
+        <input type="tel" id="phone" name="phone" placeholder="e.g. 0176 30375907" required>
+
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" placeholder="From which city?" required>
+
+        <div class="guest-grid">
+            <div>
+                <label for="adults">Adults</label>
+                <input type="number" id="adults" name="adults" value="1" min="1">
+            </div>
+            <div>
+                <label for="kids">Kids</label>
+                <input type="number" id="kids" name="kids" value="0" min="0">
+            </div>
+        </div>
+
+        <label for="notes">Special Requests</label>
+        <textarea id="notes" name="notes" rows="2" placeholder="Dietary needs or questions"></textarea>
+
+        <button type="submit" class="register-btn">Submit Registration</button>
+    </form>
+</div>
+
+</body>
+</html>
