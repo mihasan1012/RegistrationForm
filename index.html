@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eid Milan Party Registration</title>
 
-    <link rel="icon" type="image/png" href="FVIcon.png?v=3">
+    <link rel="icon" type="image/png" href="FVIcon.png?v=4">
     
     <style>
         body {
@@ -19,7 +19,6 @@
             padding: 20px;
         }
 
-        /* Language Switcher Styling */
         .lang-switcher {
             margin-bottom: 20px;
         }
@@ -43,7 +42,7 @@
 
         .registration-card {
             background: #ffffff;
-            max-width: 450px;
+            max-width: 500px;
             width: 100%;
             padding: 30px;
             border-radius: 20px;
@@ -58,10 +57,24 @@
             margin-bottom: 10px;
         }
 
-        h2 { color: #0a3d7a; margin: 10px 0; }
-        .event-detail { color: #b8860b; font-weight: bold; margin-bottom: 25px; }
+        h2 { color: #0a3d7a; margin: 10px 0 5px 0; }
+        
+        .address-header {
+            color: #b8860b;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
 
-        form { text-align: left; }
+        .intro-text {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        form { text-align: left; border-top: 1px solid #eee; padding-top: 10px; }
 
         label {
             display: block;
@@ -70,7 +83,7 @@
             color: #333;
         }
 
-        input, select, textarea {
+        input, textarea {
             width: 100%;
             padding: 12px;
             margin-top: 6px;
@@ -97,6 +110,11 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 25px;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            background-color: #0d4e9c;
         }
     </style>
 </head>
@@ -111,7 +129,11 @@
         <img src="FVIcon.png" alt="Logo" class="logo">
         
         <h2 id="title">Eid Milan Party</h2>
-        <div class="event-detail" id="date-loc">Saturday, 30.05.2026 | Wuppertal</div>
+        <div class="address-header" id="header-address">📍 Max-Planck-Straße 19, 42277 Wuppertal</div>
+        
+        <p class="intro-text" id="intro-msg">
+            Join us for a joyful Eid Milan gathering as we celebrate the blessings of Eid ul Adha. Let’s come together to share the happiness of this special occasion with food, friendship, and community spirit.
+        </p>
 
         <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
             <label for="name" id="label-name">Full Name</label>
@@ -145,7 +167,7 @@
         const translations = {
             en: {
                 title: "Eid Milan Party",
-                dateLoc: "Saturday, 30.05.2026 | Wuppertal",
+                intro: "Join us for a joyful Eid Milan gathering as we celebrate the blessings of Eid ul Adha. Let’s come together to share the happiness of this special occasion with food, friendship, and community spirit.",
                 labelName: "Full Name",
                 labelPhone: "Phone Number (WhatsApp)",
                 labelCity: "City",
@@ -161,7 +183,7 @@
             },
             de: {
                 title: "Eid Milan Party",
-                dateLoc: "Samstag, 30.05.2026 | Wuppertal",
+                intro: "Feiern Sie mit uns ein freudiges Eid Milan Treffen zum gesegneten Eid ul Adha Fest. Lassen Sie uns zusammenkommen, um das Glück dieses besonderen Anlasses bei gutem Essen und in herzlicher Gemeinschaft zu teilen.",
                 labelName: "Vollständiger Name",
                 labelPhone: "Telefonnummer (WhatsApp)",
                 labelCity: "Stadt",
@@ -178,9 +200,8 @@
         };
 
         function setLanguage(lang) {
-            // Update Text
             document.getElementById('title').innerText = translations[lang].title;
-            document.getElementById('date-loc').innerText = translations[lang].dateLoc;
+            document.getElementById('intro-msg').innerText = translations[lang].intro;
             document.getElementById('label-name').innerText = translations[lang].labelName;
             document.getElementById('label-phone').innerText = translations[lang].labelPhone;
             document.getElementById('label-city').innerText = translations[lang].labelCity;
@@ -189,12 +210,10 @@
             document.getElementById('label-notes').innerText = translations[lang].labelNotes;
             document.getElementById('submit-btn').innerText = translations[lang].submitBtn;
 
-            // Update Placeholders
             document.getElementById('name').placeholder = translations[lang].placeholders.name;
             document.getElementById('city').placeholder = translations[lang].placeholders.city;
             document.getElementById('notes').placeholder = translations[lang].placeholders.notes;
 
-            // Toggle active button style
             document.getElementById('en-btn').classList.toggle('active', lang === 'en');
             document.getElementById('de-btn').classList.toggle('active', lang === 'de');
         }
