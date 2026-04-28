@@ -5,18 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eid Milan Party Registration</title>
 
-    <link rel="icon" type="image/png" href="FVIcon.png?v=2">
+    <link rel="icon" type="image/png" href="FVIcon.png?v=3">
     
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f0f2f5;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
+        }
+
+        /* Language Switcher Styling */
+        .lang-switcher {
+            margin-bottom: 20px;
+        }
+
+        .lang-btn {
+            background: #fff;
+            border: 2px solid #0a3d7a;
+            color: #0a3d7a;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 0 5px;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: #0a3d7a;
+            color: white;
         }
 
         .registration-card {
@@ -30,9 +52,8 @@
             text-align: center;
         }
 
-        /* Updated logo styling for the PNG icon */
         .logo {
-            width: 150px; 
+            width: 140px;
             height: auto;
             margin-bottom: 10px;
         }
@@ -76,49 +97,107 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 25px;
-            transition: background 0.3s;
-        }
-
-        .register-btn:hover {
-            background-color: #0d4e9c;
         }
     </style>
 </head>
 <body>
 
-<div class="registration-card">
-    <img src="FVIcon.png" alt="Logo" class="logo">
-    
-    <h2>Eid Milan Party</h2>
-    <div class="event-detail">Saturday, 30.05.2026 | Wuppertal</div>
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLanguage('en')" id="en-btn">English</button>
+        <button class="lang-btn" onclick="setLanguage('de')" id="de-btn">Deutsch</button>
+    </div>
 
-    <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
-        <label for="name">Lead Guest Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter full name" required>
+    <div class="registration-card">
+        <img src="FVIcon.png" alt="Logo" class="logo">
+        
+        <h2 id="title">Eid Milan Party</h2>
+        <div class="event-detail" id="date-loc">Saturday, 30.05.2026 | Wuppertal</div>
 
-        <label for="phone">Phone Number (WhatsApp)</label>
-        <input type="tel" id="phone" name="phone" placeholder="e.g. 0176 30375907" required>
+        <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
+            <label for="name" id="label-name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Lead Guest Name" required>
 
-        <label for="city">From which city are you coming?</label>
-        <input type="text" id="city" name="city" placeholder="e.g. Wuppertal, Karachi" required>
+            <label for="phone" id="label-phone">Phone Number (WhatsApp)</label>
+            <input type="tel" id="phone" name="phone" placeholder="e.g. 0176 30375907" required>
 
-        <div class="guest-grid">
-            <div>
-                <label for="adults">Adults</label>
-                <input type="number" id="adults" name="adults" value="1" min="1">
+            <label for="city" id="label-city">City</label>
+            <input type="text" id="city" name="city" placeholder="From which city?" required>
+
+            <div class="guest-grid">
+                <div>
+                    <label for="adults" id="label-adults">Adults</label>
+                    <input type="number" id="adults" name="adults" value="1" min="1">
+                </div>
+                <div>
+                    <label for="kids" id="label-kids">Kids</label>
+                    <input type="number" id="kids" name="kids" value="0" min="0">
+                </div>
             </div>
-            <div>
-                <label for="kids">Kids</label>
-                <input type="number" id="kids" name="kids" value="0" min="0">
-            </div>
-        </div>
 
-        <label for="notes">Special Requests (Optional)</label>
-        <textarea id="notes" name="notes" rows="2" placeholder="Dietary needs or extra info..."></textarea>
+            <label for="notes" id="label-notes">Special Requests</label>
+            <textarea id="notes" name="notes" rows="2" placeholder="Dietary needs..."></textarea>
 
-        <button type="submit" class="register-btn">Submit Registration</button>
-    </form>
-</div>
+            <button type="submit" class="register-btn" id="submit-btn">Submit Registration</button>
+        </form>
+    </div>
 
+    <script>
+        const translations = {
+            en: {
+                title: "Eid Milan Party",
+                dateLoc: "Saturday, 30.05.2026 | Wuppertal",
+                labelName: "Full Name",
+                labelPhone: "Phone Number (WhatsApp)",
+                labelCity: "City",
+                labelAdults: "Adults",
+                labelKids: "Kids",
+                labelNotes: "Special Requests",
+                submitBtn: "Submit Registration",
+                placeholders: {
+                    name: "Lead Guest Name",
+                    city: "From which city?",
+                    notes: "Dietary needs..."
+                }
+            },
+            de: {
+                title: "Eid Milan Party",
+                dateLoc: "Samstag, 30.05.2026 | Wuppertal",
+                labelName: "Vollständiger Name",
+                labelPhone: "Telefonnummer (WhatsApp)",
+                labelCity: "Stadt",
+                labelAdults: "Erwachsene",
+                labelKids: "Kinder",
+                labelNotes: "Besondere Wünsche",
+                submitBtn: "Registrierung Absenden",
+                placeholders: {
+                    name: "Name des Hauptgastes",
+                    city: "Aus welcher Stadt kommen Sie?",
+                    notes: "Ernährungswünsche..."
+                }
+            }
+        };
+
+        function setLanguage(lang) {
+            // Update Text
+            document.getElementById('title').innerText = translations[lang].title;
+            document.getElementById('date-loc').innerText = translations[lang].dateLoc;
+            document.getElementById('label-name').innerText = translations[lang].labelName;
+            document.getElementById('label-phone').innerText = translations[lang].labelPhone;
+            document.getElementById('label-city').innerText = translations[lang].labelCity;
+            document.getElementById('label-adults').innerText = translations[lang].labelAdults;
+            document.getElementById('label-kids').innerText = translations[lang].labelKids;
+            document.getElementById('label-notes').innerText = translations[lang].labelNotes;
+            document.getElementById('submit-btn').innerText = translations[lang].submitBtn;
+
+            // Update Placeholders
+            document.getElementById('name').placeholder = translations[lang].placeholders.name;
+            document.getElementById('city').placeholder = translations[lang].placeholders.city;
+            document.getElementById('notes').placeholder = translations[lang].placeholders.notes;
+
+            // Toggle active button style
+            document.getElementById('en-btn').classList.toggle('active', lang === 'en');
+            document.getElementById('de-btn').classList.toggle('active', lang === 'de');
+        }
+    </script>
 </body>
 </html>
