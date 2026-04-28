@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eid Milan Party Registration</title>
-    <link rel="icon" type="image/png" href="FVIcon.png?v=7">
+    <link rel="icon" type="image/png" href="FVIcon.png?v=8">
     
     <style>
         body {
@@ -18,20 +17,18 @@
             padding: 20px;
         }
 
-        .lang-switcher { margin-bottom: 25px; }
-
+        /* Language Switcher - Matching your screenshot */
+        .lang-switcher { margin-bottom: 20px; }
         .lang-btn {
             background: #fff;
             border: 2px solid #0a3d7a;
             color: #0a3d7a;
-            padding: 8px 20px;
+            padding: 5px 25px;
             cursor: pointer;
-            border-radius: 25px;
+            border-radius: 20px;
             font-weight: bold;
-            margin: 0 8px;
-            transition: all 0.3s ease;
+            margin: 0 5px;
         }
-
         .lang-btn.active {
             background: #0a3d7a;
             color: white;
@@ -39,38 +36,58 @@
 
         .registration-card {
             background: #ffffff;
-            max-width: 600px;
+            max-width: 550px;
             width: 100%;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             overflow: hidden;
         }
 
-        /* Updated header using your new beautiful image */
-        .immersive-header {
-            background-image: url('header_bg.jpg');
-            background-size: cover;
-            background-position: center;
-            padding: 60px 30px;
-            text-align: center;
-            color: #ffffff;
+        /* HEADER RESTORATION: No dark overlay, just your image */
+        .header-image {
+            width: 100%;
+            display: block;
         }
 
-        .form-section { padding: 40px; }
+        .intro-section {
+            padding: 20px 30px;
+            text-align: center;
+        }
 
-        label { display: block; margin-top: 15px; font-weight: 600; color: #333; }
+        .intro-msg {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+        }
 
+        /* FORM SECTION: Restoring your clean white style */
+        .form-section { padding: 0 40px 40px 40px; }
+        
+        label { 
+            display: block; 
+            margin-top: 20px; 
+            font-weight: 500; 
+            color: #333; 
+            font-size: 15px;
+        }
+        
         input, textarea {
             width: 100%;
             padding: 12px;
             margin-top: 8px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
             box-sizing: border-box;
             font-size: 16px;
+            background-color: #fafafa;
         }
 
-        .guest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .guest-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+        }
 
         .register-btn {
             background-color: #0a3d7a;
@@ -78,15 +95,12 @@
             width: 100%;
             padding: 16px;
             border: none;
-            border-radius: 8px;
-            font-size: 19px;
+            border-radius: 10px;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
             margin-top: 30px;
-            transition: background 0.3s;
         }
-
-        .register-btn:hover { background-color: #0d4e9c; }
     </style>
 </head>
 <body>
@@ -97,7 +111,13 @@
     </div>
 
     <div class="registration-card">
-        <div class="immersive-header"></div>
+        <img src="Header_BG.jpg" alt="Eid Milan Party" class="header-image">
+
+        <div class="intro-section">
+            <p class="intro-msg" id="intro-message">
+                Join us for a joyful Eid Milan gathering as we celebrate the blessings of Eid ul Adha. Let’s come together to share the happiness of this special occasion with food, friendship, and community spirit.
+            </p>
+        </div>
 
         <div class="form-section">
             <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
@@ -122,7 +142,7 @@
                 </div>
 
                 <label for="notes" id="label-notes">Special Requests (Optional)</label>
-                <textarea id="notes" name="notes" rows="2"></textarea>
+                <textarea id="notes" name="notes" rows="3"></textarea>
 
                 <button type="submit" class="register-btn" id="submit-btn">Submit Registration</button>
             </form>
@@ -132,11 +152,13 @@
     <script>
         const translations = {
             en: {
+                intro: "Join us for a joyful Eid Milan gathering as we celebrate the blessings of Eid ul Adha. Let’s come together to share the happiness of this special occasion with food, friendship, and community spirit.",
                 labelName: "Full Name", labelPhone: "Phone Number (WhatsApp)", labelCity: "City",
                 labelAdults: "Adults", labelKids: "Kids", labelNotes: "Special Requests (Optional)",
                 submitBtn: "Submit Registration"
             },
             de: {
+                intro: "Feiern Sie mit uns ein freudiges Eid Milan Treffen zum gesegneten Eid ul Adha Fest. Lassen Sie uns zusammenkommen, um das Glück dieses besonderen Anlasses bei gutem Essen und in herzlicher Gemeinschaft zu teilen.",
                 labelName: "Vollständiger Name", labelPhone: "Telefonnummer (WhatsApp)", labelCity: "Stadt",
                 labelAdults: "Erwachsene", labelKids: "Kinder", labelNotes: "Besondere Wünsche (Optional)",
                 submitBtn: "Registrierung Absenden"
@@ -144,6 +166,7 @@
         };
 
         function setLanguage(lang) {
+            document.getElementById('intro-message').innerText = translations[lang].intro;
             document.getElementById('label-name').innerText = translations[lang].labelName;
             document.getElementById('label-phone').innerText = translations[lang].labelPhone;
             document.getElementById('label-city').innerText = translations[lang].labelCity;
