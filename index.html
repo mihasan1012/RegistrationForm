@@ -43,25 +43,25 @@
 
         .registration-card {
             background: #ffffff;
-            max-width: 450px;
+            max-width: 500px; /* Slightly wider for the new header */
             width: 100%;
-            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            border-top: 10px solid #0a3d7a;
+            overflow: hidden; /* Ensures the image corners are rounded */
             text-align: center;
         }
 
-        .logo {
-            width: 140px;
+        /* New Header Image Styling */
+        .header-banner {
+            width: 100%;
             height: auto;
-            margin-bottom: 10px;
+            display: block;
         }
 
-        h2 { color: #0a3d7a; margin: 10px 0; }
-        .event-detail { color: #b8860b; font-weight: bold; margin-bottom: 25px; }
-
-        form { text-align: left; }
+        form { 
+            text-align: left; 
+            padding: 0 30px 30px 30px; /* Padding moved inside form to keep header flush */
+        }
 
         label {
             display: block;
@@ -108,11 +108,8 @@
     </div>
 
     <div class="registration-card">
-        <img src="FVIcon.png" alt="Logo" class="logo">
+        <img src="Header_BG.png" alt="Eid Milan Party Header" class="header-banner">
         
-        <h2 id="title">Eid Milan Party</h2>
-        <div class="event-detail" id="date-loc">Saturday, 30.05.2026 | Wuppertal</div>
-
         <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
             <label for="name" id="label-name">Full Name</label>
             <input type="text" id="name" name="name" placeholder="Lead Guest Name" required>
@@ -144,8 +141,6 @@
     <script>
         const translations = {
             en: {
-                title: "Eid Milan Party",
-                dateLoc: "Saturday, 30.05.2026 | Wuppertal",
                 labelName: "Full Name",
                 labelPhone: "Phone Number (WhatsApp)",
                 labelCity: "City",
@@ -160,8 +155,6 @@
                 }
             },
             de: {
-                title: "Eid Milan Party",
-                dateLoc: "Samstag, 30.05.2026 | Wuppertal",
                 labelName: "Vollständiger Name",
                 labelPhone: "Telefonnummer (WhatsApp)",
                 labelCity: "Stadt",
@@ -179,8 +172,6 @@
 
         function setLanguage(lang) {
             // Update Text
-            document.getElementById('title').innerText = translations[lang].title;
-            document.getElementById('date-loc').innerText = translations[lang].dateLoc;
             document.getElementById('label-name').innerText = translations[lang].labelName;
             document.getElementById('label-phone').innerText = translations[lang].labelPhone;
             document.getElementById('label-city').innerText = translations[lang].labelCity;
