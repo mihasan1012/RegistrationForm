@@ -46,40 +46,20 @@
             overflow: hidden;
         }
 
-        /* Using your new beautiful header_bg.jpg */
+        /* Updated header using your new beautiful image */
         .immersive-header {
             background-image: url('header_bg.jpg');
             background-size: cover;
             background-position: center;
-            height: 300px; /* Adjusted to show your beautiful design clearly */
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 20px;
+            padding: 60px 30px;
             text-align: center;
-            position: relative;
-        }
-
-        /* This overlay helps the intro text pop if it overlaps the image */
-        .header-content-box {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 15px;
-            border-radius: 15px;
-            margin: 0 10px 10px 10px;
-            backdrop-filter: blur(3px);
-        }
-
-        .intro-msg {
             color: #ffffff;
-            font-size: 15px;
-            line-height: 1.5;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-            margin: 0;
         }
 
-        .form-section { padding: 35px; }
+        .form-section { padding: 40px; }
+
         label { display: block; margin-top: 15px; font-weight: 600; color: #333; }
-        
+
         input, textarea {
             width: 100%;
             padding: 12px;
@@ -103,7 +83,7 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 30px;
-            transition: 0.3s;
+            transition: background 0.3s;
         }
 
         .register-btn:hover { background-color: #0d4e9c; }
@@ -117,13 +97,7 @@
     </div>
 
     <div class="registration-card">
-        <div class="immersive-header">
-            <div class="header-content-box">
-                <p class="intro-msg" id="intro-message">
-                    Join us for a joyful Eid Milan gathering as we celebrate the blessings of Eid ul Adha. Let’s come together to share the happiness of this special occasion with food, friendship, and community spirit.
-                </p>
-            </div>
-        </div>
+        <div class="immersive-header"></div>
 
         <div class="form-section">
             <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
@@ -158,13 +132,11 @@
     <script>
         const translations = {
             en: {
-                intro: "Join us for a joyful Eid Milan gathering as we celebrate the blessings of Eid ul Adha. Let’s come together to share the happiness of this special occasion with food, friendship, and community spirit.",
                 labelName: "Full Name", labelPhone: "Phone Number (WhatsApp)", labelCity: "City",
                 labelAdults: "Adults", labelKids: "Kids", labelNotes: "Special Requests (Optional)",
                 submitBtn: "Submit Registration"
             },
             de: {
-                intro: "Feiern Sie mit uns ein freudiges Eid Milan Treffen zum gesegneten Eid ul Adha Fest. Lassen Sie uns zusammenkommen, um das Glück dieses besonderen Anlasses bei gutem Essen und in herzlicher Gemeinschaft zu teilen.",
                 labelName: "Vollständiger Name", labelPhone: "Telefonnummer (WhatsApp)", labelCity: "Stadt",
                 labelAdults: "Erwachsene", labelKids: "Kinder", labelNotes: "Besondere Wünsche (Optional)",
                 submitBtn: "Registrierung Absenden"
@@ -172,7 +144,6 @@
         };
 
         function setLanguage(lang) {
-            document.getElementById('intro-message').innerText = translations[lang].intro;
             document.getElementById('label-name').innerText = translations[lang].labelName;
             document.getElementById('label-phone').innerText = translations[lang].labelPhone;
             document.getElementById('label-city').innerText = translations[lang].labelCity;
