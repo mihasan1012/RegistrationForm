@@ -147,6 +147,7 @@
     <script>
         const translations = {
             en: {
+                intro: "Join us for a joyful Eid Milan gathering! Let’s celebrate the blessings of Eid ul Adha together with food, friendship, and community spirit. We look forward to seeing you and your family.",
                 labelName: "Full Name",
                 labelPhone: "Phone Number (WhatsApp)",
                 labelCity: "City",
@@ -161,6 +162,7 @@
                 }
             },
             de: {
+                intro: "Herzliche Einladung zu unserem Eid Milan Treffen! Lassen Sie uns die Segnungen von Eid ul Adha gemeinsam mit gutem Essen und Gemeinschaft feiern. Wir freuen uns auf Sie und Ihre Familie.",
                 labelName: "Vollständiger Name",
                 labelPhone: "Telefonnummer (WhatsApp)",
                 labelCity: "Stadt",
@@ -177,7 +179,7 @@
         };
 
         function setLanguage(lang) {
-            // Update Text
+            document.getElementById('intro-text').innerText = translations[lang].intro;
             document.getElementById('label-name').innerText = translations[lang].labelName;
             document.getElementById('label-phone').innerText = translations[lang].labelPhone;
             document.getElementById('label-city').innerText = translations[lang].labelCity;
