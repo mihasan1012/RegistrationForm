@@ -6,7 +6,6 @@
     <title>Eid Milan Party Registration</title>
 
     <link rel="icon" type="image/png" href="FVIcon.png?v=3">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
@@ -21,10 +20,7 @@
             padding: 20px;
         }
 
-        /* Language Switcher Styling */
-        .lang-switcher {
-            margin-bottom: 20px;
-        }
+        .lang-switcher { margin-bottom: 20px; }
 
         .lang-btn {
             background: #fff;
@@ -45,15 +41,14 @@
 
         .registration-card {
             background: #ffffff;
-            max-width: 500px; /* Slightly wider for the new header */
+            max-width: 500px;
             width: 100%;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            overflow: hidden; /* Ensures the image corners are rounded */
+            overflow: hidden;
             text-align: center;
         }
 
-        /* New Header Image Styling */
         .header-banner {
             width: 100%;
             height: auto;
@@ -62,7 +57,7 @@
 
         form { 
             text-align: left; 
-            padding: 0 30px 30px 30px; /* Padding moved inside form to keep header flush */
+            padding: 0 30px 30px 30px; 
         }
 
         label {
@@ -100,6 +95,11 @@
             cursor: pointer;
             margin-top: 25px;
         }
+
+        .register-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -113,16 +113,16 @@
         <img src="header_bg.png" alt="Eid Milan Party Header" class="header-banner">
 
         <div style="padding: 20px 25px; margin: 20px 30px 0 30px; background-color: #eef6ff; border-radius: 12px; text-align: center; border: 1px solid #d0e3ff; box-shadow: inset 0 0 10px rgba(10, 61, 122, 0.05);">
-    <p id="intro-text" style="color: #0a3d7a; font-family: 'Libre Baskerville', serif; font-size: 18px; line-height: 1.6; margin: 0; font-weight: 400; font-style: italic;">
-        Join us for a joyful Eid Milan gathering! Let’s celebrate the blessings of Eid ul Adha together with food, friendship, and community spirit. We look forward to seeing you and your family.
-    </p>
-</div>
+            <p id="intro-text" style="color: #0a3d7a; font-family: 'Libre Baskerville', serif; font-size: 18px; line-height: 1.6; margin: 0; font-weight: 400; font-style: italic;">
+                Join us for a joyful Eid Milan gathering! Let’s celebrate the blessings of Eid ul Adha together with food, friendship, and community spirit. We look forward to seeing you and your family.
+            </p>
+        </div>
 
         <h3 id="reg-heading" style="color: #0a3d7a; margin: 25px 0 10px 0; font-size: 22px; text-transform: uppercase; letter-spacing: 1px;">
-        Registration Form
-    </h3>
+            Registration Form
+        </h3>
         
-        <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
+        <form id="registration-form">
             <label for="name" id="label-name">Full Name</label>
             <input type="text" id="name" name="name" placeholder="Lead Guest Name" required>
 
@@ -151,9 +151,38 @@
     </div>
 
     <script>
+        // --- GOOGLE SHEETS INTEGRATION ---
+        const deploymentID = 'AKfycbyc-EN0U2KjvVJbIZugDDcaxXrTl0TRWjmX2_azW0t_GVrAzx3JNdKmaE5nxztUCUP9Ig'; 
+        const scriptURL = `https://script.google.com/macros/s/AKfycbyc-EN0U2KjvVJbIZugDDcaxXrTl0TRWjmX2_azW0t_GVrAzx3JNdKmaE5nxztUCUP9Ig/exec`;
+        const form = document.getElementById('registration-form');
+        const btn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true;
+            const originalBtnText = btn.innerText;
+            btn.innerText = "Sending...";
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    alert("Registration successful!");
+                    form.reset();
+                    btn.disabled = false;
+                    btn.innerText = originalBtnText;
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert("Something went wrong. Please try again.");
+                    btn.disabled = false;
+                    btn.innerText = originalBtnText;
+                });
+        });
+
+        // --- TRANSLATION LOGIC ---
         const translations = {
             en: {
                 intro: "Join us for a joyful Eid Milan gathering! Let’s celebrate the blessings of Eid ul Adha together with food, friendship, and community spirit. We look forward to seeing you and your family.",
+                regHeading: "Registration Form",
                 labelName: "Full Name",
                 labelPhone: "Phone Number (WhatsApp)",
                 labelCity: "City",
@@ -169,6 +198,7 @@
             },
             de: {
                 intro: "Herzliche Einladung zu unserem Eid Milan Treffen! Lassen Sie uns die Segnungen von Eid ul Adha gemeinsam mit gutem Essen und Gemeinschaft feiern. Wir freuen uns auf Sie und Ihre Familie.",
+                regHeading: "Anmeldeformular",
                 labelName: "Vollständiger Name",
                 labelPhone: "Telefonnummer (WhatsApp)",
                 labelCity: "Stadt",
@@ -186,6 +216,7 @@
 
         function setLanguage(lang) {
             document.getElementById('intro-text').innerText = translations[lang].intro;
+            document.getElementById('reg-heading').innerText = translations[lang].regHeading;
             document.getElementById('label-name').innerText = translations[lang].labelName;
             document.getElementById('label-phone').innerText = translations[lang].labelPhone;
             document.getElementById('label-city').innerText = translations[lang].labelCity;
@@ -194,12 +225,10 @@
             document.getElementById('label-notes').innerText = translations[lang].labelNotes;
             document.getElementById('submit-btn').innerText = translations[lang].submitBtn;
 
-            // Update Placeholders
             document.getElementById('name').placeholder = translations[lang].placeholders.name;
             document.getElementById('city').placeholder = translations[lang].placeholders.city;
             document.getElementById('notes').placeholder = translations[lang].placeholders.notes;
 
-            // Toggle active button style
             document.getElementById('en-btn').classList.toggle('active', lang === 'en');
             document.getElementById('de-btn').classList.toggle('active', lang === 'de');
         }
