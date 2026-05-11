@@ -151,28 +151,38 @@
     </div>
 
     <script>
-        // --- GOOGLE SHEETS INTEGRATION ---
+        // --- CONFIGURATION ---
         const deploymentID = 'AKfycbyc-EN0U2KjvVJbIZugDDcaxXrTl0TRWjmX2_azW0t_GVrAzx3JNdKmaE5nxztUCUP9Ig'; 
         const scriptURL = `https://script.google.com/macros/s/AKfycbyc-EN0U2KjvVJbIZugDDcaxXrTl0TRWjmX2_azW0t_GVrAzx3JNdKmaE5nxztUCUP9Ig/exec`;
+        
         const form = document.getElementById('registration-form');
         const btn = document.getElementById('submit-btn');
+        let currentLang = 'en'; // Track current language for alerts
 
+        // --- GOOGLE SHEETS INTEGRATION ---
         form.addEventListener('submit', e => {
             e.preventDefault();
             btn.disabled = true;
             const originalBtnText = btn.innerText;
-            btn.innerText = "Sending...";
+            btn.innerText = currentLang === 'en' ? "Sending..." : "Wird gesendet...";
 
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    alert("Registration successful!");
-                    form.reset();
+                .then(res => res.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        alert(translations[currentLang].msgSuccess);
+                        form.reset();
+                    } else if (data.result === 'duplicate') {
+                        alert(translations[currentLang].msgDuplicate);
+                    } else {
+                        alert(translations[currentLang].msgError);
+                    }
                     btn.disabled = false;
                     btn.innerText = originalBtnText;
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
-                    alert("Something went wrong. Please try again.");
+                    alert(translations[currentLang].msgError);
                     btn.disabled = false;
                     btn.innerText = originalBtnText;
                 });
@@ -190,6 +200,9 @@
                 labelKids: "Kids",
                 labelNotes: "Special Requests",
                 submitBtn: "Submit Registration",
+                msgSuccess: "Registration successful!",
+                msgDuplicate: "This phone number is already registered!",
+                msgError: "Something went wrong. Please try again.",
                 placeholders: {
                     name: "Lead Guest Name",
                     city: "From which city?",
@@ -206,6 +219,9 @@
                 labelKids: "Kinder",
                 labelNotes: "Besondere Wünsche",
                 submitBtn: "Registrierung Absenden",
+                msgSuccess: "Registrierung erfolgreich!",
+                msgDuplicate: "Diese Telefonnummer ist bereits registriert!",
+                msgError: "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",
                 placeholders: {
                     name: "Name des Hauptgastes",
                     city: "Aus welcher Stadt kommen Sie?",
@@ -215,6 +231,7 @@
         };
 
         function setLanguage(lang) {
+            currentLang = lang; // Update global language tracker
             document.getElementById('intro-text').innerText = translations[lang].intro;
             document.getElementById('reg-heading').innerText = translations[lang].regHeading;
             document.getElementById('label-name').innerText = translations[lang].labelName;
